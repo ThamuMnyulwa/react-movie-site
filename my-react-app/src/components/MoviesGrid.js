@@ -32,9 +32,11 @@ export default function MoviesGrid() {
                 return (
                     <div key={movie.id} className='movie-card'>
                         <img src={`images/${movie.image}`} alt={movie.title} />
-                        <div className='movie-card-info'> <h3>{movie.title}</h3> </div>
-                        <div className='movie-card-genre'><p>{movie.genre}</p> </div>
-                        <div className='movie-card-rating'> <p>{movie.year}</p> </div>
+                        <div className='movie-card-info'> 
+                            <div className='movie-card-titla'> <h3>{movie.title}</h3> </div>
+                            <div className='movie-card-genre'><p>{movie.genre}</p> </div>
+                            <div className='movie-card-rating'> <p>{movie.rating}</p> </div>
+                        </div>
                     </div>
                 );
             })
