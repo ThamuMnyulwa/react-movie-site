@@ -12,3 +12,9 @@ We can also use the typescript template:
 ```
 npx create-react-app my-react-app --template typescript
 ```
+
+Install node:
+
+```
+brew install node
+```
