@@ -41,10 +41,40 @@ export default function MoviesGrid() {
         setRating(event.target.value);
     };
 
-    // We have to filter the movies based on the search term
+    // Filter the movies based on the genre and rating
+    const matchesGenre = (movie, genre) => {
+        return genre === "All Genres" || movie.genre.toLowerCase() === genre.toLowerCase();
+    };
+
+
+    const matchesRating = (movie, rating) => {
+        switch(rating){
+            case "All Ratings":
+                return true;
+            case "Good":
+                return movie.rating >= 8;
+            case "Ok":
+                return movie.rating >= 6 && movie.rating < 8;
+            case "Bad":
+                return movie.rating < 6;
+                // If nothing matches we want to return false, so nothing matches
+            default:
+                return false;
+        }
+    }
+
+    const matchesSearchTerm = (movie, searchTerm) => {
+        return movie.title.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+
+    // We have to filter the movies based on the search term, Rating and Genre (We are filtering in a tree, first by genre, then by rating, then by search term)
+    //movie.title.toLowerCase().includes(searchTerm.toLowerCase())
     const filteredMovies = movies.filter(movie => 
-        movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+        matchesGenre(movie, genre) &&
+        matchesSearchTerm(movie, searchTerm) &&
+        matchesRating(movie, rating)
     );
+
 
     // We have to use the backtick ` and dollar sign to interpolate the image path
     // Turn our component into a controlled component (filteredMovies), whenever we change a value in the search bar, we update the state
